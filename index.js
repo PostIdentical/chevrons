@@ -37,12 +37,6 @@ function setup() {
 }
 
 function draw() {
-  // translate(canvasWidth / 2, canvasHeight / 2);
-
-  // randomness should be in draw ?
-  // in this case, in each draw, random values are the same ?
-  // things like lineCoordinates[i + 1].speed * random value ? (and so is speed usefull ?)
-  // 
 
   background('rgba(255,255,255, .05)');
   
