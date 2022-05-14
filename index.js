@@ -77,7 +77,3 @@ function draw() {
 
   }
 }
-
-function mousePressed() {
-  noLoop();
-}
