@@ -6,7 +6,7 @@ const rowNumber = 40;
 const colWidth = canvasWidth / colNumber;
 const rowHeight = canvasHeight / rowNumber;
 const lineCoordinates = [];
-const variatorRangeBase = 20;
+const variatorRangeBase = 10;
 let variatorA;
 let variatorB;
 
@@ -45,7 +45,7 @@ function setup() {
 
 function draw() {
 
-  background('rgba(27,27,131, 1)');
+  background('rgba(27,27,131, .2)');
   
   for (let i = 0; i < lineCoordinates.length; i++) {
 
