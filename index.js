@@ -1,11 +1,12 @@
 const chevronParent = document.getElementById('container');
 const canvasWidth = 450;
 const canvasHeight = 450;
-const colNumber = 40;
-const rowNumber = 20;
+const colNumber = 30;
+const rowNumber = 40;
 const colWidth = canvasWidth / colNumber;
 const rowHeight = canvasHeight / rowNumber;
 const lineCoordinates = [];
+const variatorRangeBase = 20;
 let variatorA;
 let variatorB;
 
@@ -20,7 +21,7 @@ function setup() {
 
   for (let i = 0; i < colNumber + 1; i++) {
     for (let j = 0; j < rowNumber; j++) {
-      const randomVariator = [getRandomArbitrary(-20, -1), getRandomArbitrary(1, 20)];
+      const randomVariator = [getRandomArbitrary(variatorRangeBase * -1, -1), getRandomArbitrary(1, variatorRangeBase)];
       const randomNeedle = Math.floor(Math.random() * randomVariator.length);
       // line with 2 vectors,
       // x value of the 2nd vector as a random value beetween a +/- range
@@ -44,7 +45,7 @@ function setup() {
 
 function draw() {
 
-  background('rgba(27,27,131, .2)');
+  background('rgba(27,27,131, 1)');
   
   for (let i = 0; i < lineCoordinates.length; i++) {
 
@@ -55,25 +56,36 @@ function draw() {
     }
 
     // only 1 of 2 vector will have a live variation
+    // variatorB increment twice to keep up with i-1 allready incremented value 
     if (i % 2 === 0) {
       variatorA = 0;
-      variatorB = lineCoordinates[i + 1].variator + lineCoordinates[i + 1].directionVariator;
+      variatorB = lineCoordinates[i].variator + lineCoordinates[i].directionVariator  + lineCoordinates[i].directionVariator;
     } else {
-      variatorA = lineCoordinates[i].variator + lineCoordinates[i].directionVariator;
+      if (i > 0) {
+        variatorA = lineCoordinates[i - 1].variator + lineCoordinates[i - 1].directionVariator;
+      } else {
+        variatorA = 0;
+      }
       variatorB = 0;
     }
     // if this is the first vector of the column we give him the first x position
     // other will recieve the randomized x value from the previous vector
-    const firstX = i % colNumber === 0 ? lineCoordinates[i].vector1.x : lineCoordinates[i - 1].vector2.x;
+    const firstX = i % rowNumber === 0 ? lineCoordinates[i].vector1.x : lineCoordinates[i - 1].vector2.x;
     line(
       firstX + variatorA, 
       lineCoordinates[i].vector1.y, 
       lineCoordinates[i].vector2.x + variatorB, 
       lineCoordinates[i].vector2.y
     );
+    
     stroke(129,27,201)
 
     lineCoordinates[i].variator += lineCoordinates[i].directionVariator;
+
+    console.log(i, '1X', lineCoordinates[i].vector1.x)
+    console.log(i, '2X', lineCoordinates[i].vector2.x)
+    console.log(i, '1Y', lineCoordinates[i].vector1.y)
+    console.log(i, '2Y', lineCoordinates[i].vector2.y)
 
   }
 }
