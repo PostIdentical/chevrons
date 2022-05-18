@@ -17,7 +17,7 @@ function getRandomArbitrary(min, max) {
 function setup() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent(chevronParent);
-  // frameRate(30);
+  frameRate(15);
 
   for (let i = 0; i < colNumber + 1; i++) {
     for (let j = 0; j < rowNumber; j++) {
@@ -80,11 +80,6 @@ function draw() {
     stroke(129,27,201)
 
     lineCoordinates[i].variator += lineCoordinates[i].directionVariator;
-
-    console.log(i, '1X', lineCoordinates[i].vector1.x)
-    console.log(i, '2X', lineCoordinates[i].vector2.x)
-    console.log(i, '1Y', lineCoordinates[i].vector1.y)
-    console.log(i, '2Y', lineCoordinates[i].vector2.y)
 
   }
 }
