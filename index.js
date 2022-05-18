@@ -6,7 +6,7 @@ const rowNumber = 40;
 const colWidth = canvasWidth / colNumber;
 const rowHeight = canvasHeight / rowNumber;
 const lineCoordinates = [];
-const variatorRangeBase = 20;
+const variatorRangeBase = 10;
 let variatorA;
 let variatorB;
 
@@ -17,7 +17,7 @@ function getRandomArbitrary(min, max) {
 function setup() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent(chevronParent);
-  frameRate(30);
+  // frameRate(30);
 
   for (let i = 0; i < colNumber + 1; i++) {
     for (let j = 0; j < rowNumber; j++) {
@@ -45,7 +45,7 @@ function setup() {
 
 function draw() {
 
-  background('rgba(27,27,131, 1)');
+  background('rgba(27,27,131, .2)');
   
   for (let i = 0; i < lineCoordinates.length; i++) {
 
@@ -59,10 +59,10 @@ function draw() {
     // variatorB increment twice to keep up with i-1 allready incremented value 
     if (i % 2 === 0) {
       variatorA = 0;
-      variatorB = lineCoordinates[i].variator + lineCoordinates[i].directionVariator  + lineCoordinates[i].directionVariator;
+      variatorB = lineCoordinates[i].variator + lineCoordinates[i].directionVariator;
     } else {
       if (i > 0) {
-        variatorA = lineCoordinates[i - 1].variator + lineCoordinates[i - 1].directionVariator;
+        variatorA = lineCoordinates[i - 1].variator;
       } else {
         variatorA = 0;
       }
