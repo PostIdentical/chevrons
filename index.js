@@ -56,7 +56,6 @@ function draw() {
     }
 
     // only 1 of 2 vector will have a live variation
-    // variatorB increment twice to keep up with i-1 allready incremented value 
     if (i % 2 === 0) {
       variatorA = 0;
       variatorB = lineCoordinates[i].variator + lineCoordinates[i].directionVariator;
