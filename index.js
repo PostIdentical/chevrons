@@ -1,14 +1,18 @@
 const chevronParent = document.getElementById('container');
-const canvasWidth = 450;
-const canvasHeight = 450;
-const colNumber = 30;
-const rowNumber = 40;
+const canvasWidth = 680;
+const canvasHeight = canvasWidth;
+const colNumber = 40;
+const rowNumber = 20;
 const colWidth = canvasWidth / colNumber;
 const rowHeight = canvasHeight / rowNumber;
 const lineCoordinates = [];
-const variatorRangeBase = 10;
+const variatorRangeBase = 40;
 let variatorA;
 let variatorB;
+
+let blueVariator = 1;
+let greenVariator = 1;
+let redVariator = 1;
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -38,6 +42,9 @@ function setup() {
         variator: randomVariator[randomNeedle],
         variatorRange: [...randomVariator],
         directionVariator: 1,
+        blue: getRandomArbitrary(150, 255),
+        green: getRandomArbitrary(0, 30),
+        red: getRandomArbitrary(70, 130),
       });
     }
   }
@@ -45,7 +52,7 @@ function setup() {
 
 function draw() {
 
-  background('rgba(27,27,131, .2)');
+  background('rgba(27,27,131, .05)');
   
   for (let i = 0; i < lineCoordinates.length; i++) {
 
@@ -76,8 +83,32 @@ function draw() {
       lineCoordinates[i].vector2.x + variatorB, 
       lineCoordinates[i].vector2.y
     );
+
+    if (lineCoordinates[i].blue >= 255) {
+      blueVariator = -.1;
+    } else if (lineCoordinates[i].blue <= 170) {
+      blueVariator = .1;
+    }
+
+    lineCoordinates[i].blue += blueVariator;
+
+    if (lineCoordinates[i].green >= 50) {
+      greenVariator = -.5;
+    } else if (lineCoordinates[i].green <= 0) {
+      greenVariator = .5;
+    }
+
+    lineCoordinates[i].green += greenVariator;
+
+    if (lineCoordinates[i].red >= 130) {
+      redVariator = -.5;
+    } else if (lineCoordinates[i].red <= 70) {
+      redVariator = .5;
+    }
+
+    lineCoordinates[i].red += redVariator;
     
-    stroke(129,27,201)
+    stroke(lineCoordinates[i].red, lineCoordinates[i].green, lineCoordinates[i].blue);
 
     lineCoordinates[i].variator += lineCoordinates[i].directionVariator;
 
